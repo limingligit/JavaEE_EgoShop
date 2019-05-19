@@ -1,0 +1,22 @@
+package com.ego.manage.controller;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ego.commons.pojo.EasyUITree;
+import com.ego.manage.service.TbItemCatService;
+
+@Controller
+public class TbItemCatController {
+	@Resource
+	private TbItemCatService tbItemCatServiceImpl;
+	
+	public List<EasyUITree> showCat(@RequestParam(defaultValue="0") long id){
+		
+		return tbItemCatServiceImpl.show(id);
+	}
+}

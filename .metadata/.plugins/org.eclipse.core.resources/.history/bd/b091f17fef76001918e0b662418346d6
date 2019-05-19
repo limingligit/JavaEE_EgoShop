@@ -1,0 +1,8 @@
+package com.ego.manage.service;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public interface PicService {
+	
+	boolean upload(MultipartFile file);
+}

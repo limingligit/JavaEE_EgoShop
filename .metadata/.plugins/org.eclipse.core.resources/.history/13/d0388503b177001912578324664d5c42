@@ -1,0 +1,5 @@
+package com.ego.manage.service.impl;
+
+public class TbItemParamServiceImpl {
+
+}

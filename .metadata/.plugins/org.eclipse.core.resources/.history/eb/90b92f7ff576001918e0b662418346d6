@@ -1,0 +1,13 @@
+package com.ego.manage.service;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public interface PicService {
+	
+	/**
+	 * 文件上传
+	 * @param file
+	 * @return
+	 */
+	boolean upload(MultipartFile file);
+}

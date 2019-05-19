@@ -1,0 +1,10 @@
+package com.ego.commons.pojo;
+
+public class EasyUIDataGrid {
+	//当前页显示数据
+	private List<?> rows;
+	//总条数
+	private long total;
+	
+	
+}

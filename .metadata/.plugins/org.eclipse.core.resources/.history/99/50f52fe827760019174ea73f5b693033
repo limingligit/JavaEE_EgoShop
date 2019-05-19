@@ -1,0 +1,5 @@
+package com.ego.commons.pojo;
+
+public class EasyUIDataGrid {
+
+}
