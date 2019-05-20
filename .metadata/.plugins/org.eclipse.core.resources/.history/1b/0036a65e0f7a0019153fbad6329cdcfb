@@ -1,0 +1,5 @@
+package com.ego.item.service.impl;
+
+public class TbItemCatServiceImpl {
+
+}

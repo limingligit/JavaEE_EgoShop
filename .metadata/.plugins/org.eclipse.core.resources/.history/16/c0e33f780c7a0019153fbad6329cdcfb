@@ -1,0 +1,5 @@
+package com.ego.item.pojo;
+
+public class PortalMenuNode {
+
+}

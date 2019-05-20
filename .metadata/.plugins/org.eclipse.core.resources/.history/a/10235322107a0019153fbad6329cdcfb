@@ -1,0 +1,28 @@
+package com.ego.item.service.impl;
+
+import java.util.List;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.ego.dubbo.service.TbItemCatDubboService;
+import com.ego.item.pojo.PortalMenu;
+import com.ego.item.service.TbItemCatService;
+import com.ego.pojo.TbItemCat;
+
+public class TbItemCatServiceImpl implements TbItemCatService{
+	@Reference
+	private TbItemCatDubboService tbItemCatDubboServiceImpl;
+	
+	@Override
+	public PortalMenu showCatMenu() {
+		List<TbItemCat> list=tbItemCatDubboServiceImpl.show(0);
+		return null;
+	}
+	
+	
+	public List<Object> selAllMenu(List<TbItemCat> list){
+		
+	}
+	
+	
+
+}

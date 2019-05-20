@@ -3,17 +3,13 @@
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
 			<item value="com.ego"/>
-			<item value="com.zcib"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
-			<item value="ego-manage"/>
+			<item value="ego-item"/>
 			<item value="ego-parent"/>
-			<item value="ego-commons"/>
-			<item value="ego-service-impl"/>
-			<item value="ego-service"/>
-			<item value="ego-pojo"/>
+			<item value="ego-portal"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -51,6 +47,8 @@
 	</section>
 	<section name="MavenModuleWizardParentPage">
 		<list key="moduleName">
+			<item value="ego-item"/>
+			<item value="ego-portal"/>
 			<item value="ego-manage"/>
 			<item value="ego-commons"/>
 			<item value="ego-service-impl"/>
@@ -80,13 +78,13 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
-			<item value="org.ego.manage"/>
+			<item value="org.ego.item"/>
 		</list>
 		<list key="groupId">
 			<item value="com.ego"/>
 		</list>
 		<list key="artifactId">
-			<item value="ego-manage"/>
+			<item value="ego-item"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
