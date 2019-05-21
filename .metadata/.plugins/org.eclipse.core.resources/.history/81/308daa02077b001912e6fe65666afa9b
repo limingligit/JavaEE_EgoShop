@@ -1,0 +1,17 @@
+package com.ego.manage.service.impl;
+
+import java.util.List;
+
+import com.ego.commons.pojo.EasyUITree;
+import com.ego.manage.service.TbContentCategoryService;
+
+public class TbContentCategoryServiceImpl implements TbContentCategoryService{
+
+	@Override
+	public List<EasyUITree> showCategory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+}

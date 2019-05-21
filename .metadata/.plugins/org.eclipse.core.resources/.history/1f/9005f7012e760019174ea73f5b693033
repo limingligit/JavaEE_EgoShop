@@ -1,7 +1,0 @@
-package com.ego.manage.service;
-
-import com.ego.commons.pojo.EasyUIDataGrid;
-
-public interface TbItemService {
-	EasyUIDataGrid show(int page,int rows);
-}

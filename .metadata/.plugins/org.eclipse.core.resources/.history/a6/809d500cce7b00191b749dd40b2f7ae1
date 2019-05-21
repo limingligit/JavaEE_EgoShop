@@ -1,0 +1,10 @@
+package com.ego.dubbo.service;
+
+import com.ego.commons.pojo.EasyUIDataGrid;
+import com.ego.pojo.TbContent;
+
+public interface TbContentDubboService {
+	EasyUIDataGrid selContentByPage(long cateId,int page,int rows);
+	
+	int insContent(TbContent content);
+}

@@ -1,0 +1,121 @@
+package com.ego.manage.service.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.ego.commons.pojo.EasyUITree;
+import com.ego.commons.pojo.EgoResult;
+import com.ego.commons.utils.IDUtils;
+import com.ego.dubbo.service.TbContentCategoryDubboService;
+import com.ego.manage.service.TbContentCategoryService;
+import com.ego.pojo.TbContentCategory;
+
+@Service
+public class TbContentCategoryServiceImpl implements TbContentCategoryService{
+	@Reference
+	private TbContentCategoryDubboService tbContentCategoryDubboServiceImpl;
+	
+	@Override
+	public List<EasyUITree> showCategory(long id) {
+		
+		List<EasyUITree> listTree = new ArrayList<EasyUITree>();
+		List<TbContentCategory> list = tbContentCategoryDubboServiceImpl.selByPid(id);
+		
+		for (TbContentCategory category : list) {
+			
+			EasyUITree easyUITree = new EasyUITree();
+			easyUITree.setId(category.getId());
+			easyUITree.setText(category.getName());
+			easyUITree.setState(category.getIsParent()?"closed":"open");
+			
+			listTree.add(easyUITree);
+		}
+		return listTree;
+	}
+
+	@Override
+	public EgoResult create(TbContentCategory cate) {
+		EgoResult egoResult = new EgoResult();
+		List<TbContentCategory> childrenList = tbContentCategoryDubboServiceImpl.selByPid(cate.getParentId());
+		for (TbContentCategory child : childrenList) {
+			if(child.getName().equals(cate.getName())){
+				return egoResult;
+			}
+			
+		}
+		
+		Date date = new Date();
+		cate.setCreated(date);
+		cate.setUpdated(date);
+		cate.setIsParent(false);
+		cate.setStatus(1);
+		cate.setSortOrder(1);
+		long id = IDUtils.genItemId();
+		cate.setId(id);
+		
+		int index = tbContentCategoryDubboServiceImpl.insTbContentCategory(cate);
+		if(index>0){
+			TbContentCategory parent=new TbContentCategory();
+			parent.setId(cate.getParentId());
+			parent.setIsParent(true);
+			tbContentCategoryDubboServiceImpl.updCategoryById(parent);
+		}
+		Map<String,Long> map=new HashMap<>();
+		map.put("id", id);
+		egoResult.setStatus(200);
+		egoResult.setData(map);
+		return egoResult;
+	}
+
+
+
+	@Override
+	public EgoResult rename(TbContentCategory cate) {
+		EgoResult egoResult = new EgoResult();
+		TbContentCategory selCate = tbContentCategoryDubboServiceImpl.selCategoryById(cate.getId());
+		List<TbContentCategory> list = tbContentCategoryDubboServiceImpl.selByPid(selCate.getParentId());
+		for (TbContentCategory category : list) {
+			if(category.getName().equals(cate.getName())){
+				return egoResult;
+			}
+		}
+		
+		int index = tbContentCategoryDubboServiceImpl.updCategoryById(cate);
+		if(index>0){
+			egoResult.setStatus(200);
+		}
+		return egoResult;
+	}
+
+	@Override
+	public EgoResult delete(TbContentCategory cate) {
+		EgoResult egoResult = new EgoResult();
+		cate.setStatus(0);
+		int index = tbContentCategoryDubboServiceImpl.updCategoryById(cate);
+		if(index>0){
+			List<TbContentCategory> list = tbContentCategoryDubboServiceImpl.selByPid(cate.getId());
+			if(list==null||list.size()==0){
+				TbContentCategory category = tbContentCategoryDubboServiceImpl.selCategoryById(cate.getId());
+				TbContentCategory category2=new TbContentCategory();
+				category2.setId(category.getParentId());
+				category2.setIsParent(false);
+				int i = tbContentCategoryDubboServiceImpl.updCategoryById(category);
+				if(i>0){
+					egoResult.setStatus(200);
+				}
+			}else{
+				egoResult.setStatus(200);
+			}
+		}
+		
+		return egoResult;
+	}
+	
+
+}

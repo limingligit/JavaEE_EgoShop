@@ -1,0 +1,14 @@
+package com.ego.manage.service;
+
+import com.ego.commons.pojo.EasyUIDataGrid;
+
+public interface TbContentService {
+	/**
+	 * 分页查询
+	 * @param cateId
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	EasyUIDataGrid show(long cateId,int page,int rows);
+}

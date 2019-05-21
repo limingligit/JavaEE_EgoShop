@@ -1,0 +1,67 @@
+package com.ego.manage.service.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.ego.commons.pojo.EasyUITree;
+import com.ego.dubbo.service.TbContentCategoryDubboService;
+import com.ego.manage.service.TbContentCategoryService;
+import com.ego.pojo.TbContentCategory;
+
+@Service
+public class TbContentCategoryServiceImpl implements TbContentCategoryService{
+	@Reference
+	private TbContentCategoryDubboService tbContentCategoryDubboServiceImpl;
+	
+	@Override
+	public List<EasyUITree> showCategory(long id) {
+		
+		List<EasyUITree> listTree = new ArrayList<EasyUITree>();
+		List<TbContentCategory> list = tbContentCategoryDubboServiceImpl.selByPid(id);
+		
+		for (TbContentCategory category : list) {
+			
+			EasyUITree easyUITree = new EasyUITree();
+			easyUITree.setId(category.getId());
+			easyUITree.setText(category.getName());
+			easyUITree.setState(category.getIsParent()?"closed":"open");
+			
+			listTree.add(easyUITree);
+		}
+		return listTree;
+	}
+
+	@Override
+	public int create(TbContentCategory cate) {
+		List<TbContentCategory> childrenList = tbContentCategoryDubboServiceImpl.selByPid(cate.getParentId());
+		for (TbContentCategory child : childrenList) {
+			if(child.getName().equals(cate.getName())){
+				return 0;
+			}
+			
+		}
+		
+		Date date = new Date();
+		cate.setCreated(date);
+		cate.setUpdated(date);
+		cate.setIsParent(false);
+		cate.setStatus(1);
+		cate.setSortOrder(1);
+		
+		int index = tbContentCategoryDubboServiceImpl.insTbContentCategory(cate);
+		if(index>0){
+			TbContentCategory parent=new TbContentCategory();
+			parent.setId(cate.getParentId());
+			parent.setIsParent(true);
+			tbContentCategoryDubboServiceImpl.updIsParentById(cate);
+		}
+		
+		return 1;
+	}
+	
+
+}
