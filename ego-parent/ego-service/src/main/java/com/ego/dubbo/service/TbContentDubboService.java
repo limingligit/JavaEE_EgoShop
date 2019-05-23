@@ -1,5 +1,7 @@
 package com.ego.dubbo.service;
 
+import java.util.List;
+
 import com.ego.commons.pojo.EasyUIDataGrid;
 import com.ego.pojo.TbContent;
 
@@ -30,6 +32,14 @@ public interface TbContentDubboService {
 	 * @return
 	 */
 	int delContentByIds(String ids) throws Exception;
+	
+	/**
+	 * 查询指定条数
+	 * @param count
+	 * @param isSort
+	 * @return
+	 */
+	List<TbContent> selByCount(int count,boolean isSort);
 	
 	
 }

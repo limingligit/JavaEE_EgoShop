@@ -52,5 +52,23 @@ public class TbContentDubboServiceImpl implements TbContentDubboService{
 				throw new Exception("删除失败，数据可能不存在！");
 			}
 	}
+	@Override
+	public List<TbContent> selByCount(int count, boolean isSort) {
+		
+		TbContentExample example = new TbContentExample();
+		if(isSort){
+			example.setOrderByClause("updated desc");
+		}
+		if(count!=0){
+			PageHelper.startPage(1, count);
+			List<TbContent> list = tbContentMapper.selectByExampleWithBLOBs(example);
+			PageInfo<TbContent> pi = new PageInfo<>(list);
+			return pi.getList();
+		}else{
+			return tbContentMapper.selectByExampleWithBLOBs(example);
+		}
+		
+		
+	}
 
 }

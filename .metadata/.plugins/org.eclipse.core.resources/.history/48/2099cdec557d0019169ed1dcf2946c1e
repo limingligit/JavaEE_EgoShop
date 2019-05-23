@@ -1,0 +1,33 @@
+package com.ego.portal.service.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.ego.dubbo.service.TbContentDubboService;
+import com.ego.pojo.TbContent;
+import com.ego.portal.service.TbContentService;
+
+@Service
+public class TbContentServiceImpl implements TbContentService{
+	@Reference
+	private TbContentDubboService tbContentDubboServiceImpl;
+
+	@Override
+	public String showBigPic() {
+		List<TbContent> list = tbContentDubboServiceImpl.selByCount(6, true);
+		List<Map<String,Object>> jsonList=new ArrayList<>();
+		for (TbContent tc : list) {
+			Map<String, Object> map = new HashMap<String,Object>();
+			map.put("srcB", tc.getPic());
+			map.put("height", 240);
+			map.put("alt", "")
+		}
+		return null;
+	}
+
+}

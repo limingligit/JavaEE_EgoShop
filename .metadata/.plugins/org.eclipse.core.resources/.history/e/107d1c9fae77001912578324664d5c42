@@ -1,5 +1,0 @@
-package com.ego.dubbo.service.impl;
-
-public class TbItemParamDubboServiceImpl {
-
-}

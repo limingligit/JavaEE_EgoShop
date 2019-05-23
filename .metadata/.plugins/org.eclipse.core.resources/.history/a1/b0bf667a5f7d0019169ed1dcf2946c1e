@@ -1,0 +1,5 @@
+package com.ego.redis.dao;
+
+public interface JedisDao {
+
+}

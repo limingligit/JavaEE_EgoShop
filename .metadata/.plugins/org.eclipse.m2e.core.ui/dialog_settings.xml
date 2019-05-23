@@ -7,8 +7,9 @@
 		<list key="name">
 		</list>
 		<list key="artifactId">
-			<item value="ego-item"/>
+			<item value="ego-redis"/>
 			<item value="ego-parent"/>
+			<item value="ego-item"/>
 			<item value="ego-portal"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -47,6 +48,7 @@
 	</section>
 	<section name="MavenModuleWizardParentPage">
 		<list key="moduleName">
+			<item value="ego-redis"/>
 			<item value="ego-item"/>
 			<item value="ego-portal"/>
 			<item value="ego-manage"/>
@@ -78,13 +80,13 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
-			<item value="org.ego.item"/>
+			<item value="org.ego.redis"/>
 		</list>
 		<list key="groupId">
 			<item value="com.ego"/>
 		</list>
 		<list key="artifactId">
-			<item value="ego-item"/>
+			<item value="ego-redis"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

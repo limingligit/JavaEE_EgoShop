@@ -14,6 +14,12 @@
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.ego</groupId>
+			<artifactId>ego-redis</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- 依赖接口 -->
 		<dependency>
 			<groupId>com.ego</groupId>
